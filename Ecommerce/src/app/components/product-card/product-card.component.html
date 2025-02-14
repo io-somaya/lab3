@@ -1,0 +1,27 @@
+<div class="card h-100">
+  <img [src]="product.thumbnail" class="card-img-top" [alt]="product.title">
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <p class="card-text text-decoration-line-through">${{ product.price }}</p>
+        <p class="card-text">Discounted Price: {{ product.price | discount:product.discountPercentage | currency }}</p>
+      </div>
+      <div class="text-warning">
+        {{ '★'.repeat(Math.floor(product.rating)) }}
+        <small class="text-muted">({{ product.rating }})</small>
+      </div>
+    </div>
+    @if (product.stock > 0) {
+      <p class="badge bg-success">In Stock</p>
+    } @else {
+      <p class="badge bg-danger">Out of Stock</p>
+    }
+    <a [routerLink]="['/product', product.id]" class="btn btn-outline-primary w-100 mb-2">View Details</a>
+  </div>
+</div>
+
+
+
+
+

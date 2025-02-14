@@ -1,0 +1,15 @@
+<div class="container mt-4">
+  <h2>Welcome to our shopping website, start browsing...</h2>
+  <div class="row">
+    @for (product of products; track product.id) {
+      <div class="col-md-4 mb-4">
+        <app-product-card [product]="product"></app-product-card>
+      </div>
+    } @empty {
+      <p>No products available</p>
+    }
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-3">
+  <button class="btn btn-primary" (click)="loadMore()">Load More</button>
+</div>

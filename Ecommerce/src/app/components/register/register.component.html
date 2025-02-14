@@ -1,0 +1,172 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h3 class="card-title text-center">Products</h3>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
+              <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  formControlName="name"
+                />
+                @if (formControls['name'].touched && formControls['name'].invalid) {
+                  @if (formControls['name'].hasError('required')) {
+                    <div class="text-danger">Name is required.</div>
+                  }
+                }
+              </div>
+  
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  formControlName="email"
+                />
+                @if (formControls['email'].touched && formControls['email'].invalid) {
+                  @if (formControls['email'].hasError('required')) {
+                    <div class="text-danger">Email is required.</div>
+                  }
+                  @if (formControls['email'].hasError('email')) {
+                    <div class="text-danger">Invalid email format.</div>
+                  }
+                }
+              </div>
+  
+              <div class="mb-3">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  formControlName="username"
+                />
+                @if (formControls['username'].touched && formControls['username'].invalid) {
+                  @if (formControls['username'].hasError('required')) {
+                    <div class="text-danger">Username is required.</div>
+                  }
+                  @if (formControls['username'].hasError('pattern')) {
+                    <div class="text-danger">Username cannot contain spaces.</div>
+                  }
+                }
+              </div>
+  
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  formControlName="password"
+                />
+                @if (formControls['password'].touched && formControls['password'].invalid) {
+                  @if (formControls['password'].hasError('required')) {
+                    <div class="text-danger">Password is required.</div>
+                  }
+                  @if (formControls['password'].hasError('pattern')) {
+                    <div class="text-danger">
+                      Password must contain at least one lowercase, one uppercase, one digit, and one special character.
+                    </div>
+                  }
+                }
+              </div>
+  
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="confirmPassword"
+                  formControlName="confirmPassword"
+                />
+                @if (formControls['confirmPassword'].touched && formControls['confirmPassword'].invalid) {
+                  @if (formControls['confirmPassword'].hasError('required')) {
+                    <div class="text-danger">Confirm Password is required.</div>
+                  }
+                  @if (formControls['confirmPassword'].hasError('mismatch')) {
+                    <div class="text-danger">Passwords do not match.</div>
+                  }
+                }
+              </div>
+  
+              <!-- Dynamic Address Form Array -->
+              <div formArrayName="addresses">
+                @for (address of addresses.controls; track $index; let i = $index) {
+                  <div class="card mb-3" [formGroupName]="i">
+                    <div class="card-body">
+                      <h5 class="card-title">Address {{ i + 1 }}</h5>
+                      <div class="mb-3">
+                        <label for="street{{ i }}" class="form-label">Street</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="street{{ i }}"
+                          formControlName="street"
+                        />
+                        @if (address.get('street')?.touched && address.get('street')?.invalid) {
+                          <div class="text-danger">Street is required.</div>
+                        }
+                      </div>
+                      <div class="mb-3">
+                        <label for="city{{ i }}" class="form-label">City</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="city{{ i }}"
+                          formControlName="city"
+                        />
+                        @if (address.get('city')?.touched && address.get('city')?.invalid) {
+                          <div class="text-danger">City is required.</div>
+                        }
+                      </div>
+                      <div class="mb-3">
+                        <label for="country{{ i }}" class="form-label">Country</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="country{{ i }}"
+                          formControlName="country"
+                        />
+                        @if (address.get('country')?.touched && address.get('country')?.invalid) {
+                          <div class="text-danger">Country is required.</div>
+                        }
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-sm"
+                        (click)="removeAddress(i)"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+  
+              <button
+                type="button"
+                class="btn btn-secondary mb-3"
+                (click)="addAddress()"
+              >
+                Add Address
+              </button>
+  
+              <button type="submit" class="btn btn-primary w-100" [disabled]="registerForm.invalid">
+                Register
+              </button>
+            </form>
+            <div class="mt-3 text-center">
+              <p>Already have an account? <a routerLink="/login">Login</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+ <div class="card h-100">
+  <img 
+  [src]="product.thumbnail" 
+  class="card-img-top" 
+  [alt]="product.title"
+  [ngStyle]="{ 'height': '200px', 'object-fit': 'contain' }"
+>
+  <div class="card-body">
+    <h5 class="card-title">{{ product.title }}</h5>
+    <p class="card-text">{{ product.description }}</p>
+    <p class="card-text"><strong>Price:</strong> {{ product.price | currency }}</p>
+    
+    <div class="text-warning">
+      {{ '★'.repeat(Math.floor(product.rating)) }}
+      <small class="text-muted">({{ product.rating }})</small>
+    </div>
+    @if (product.stock > 0) {
+      <p class="text-success">In Stock</p>
+    } @else {
+      <p class="text-danger">Out of Stock</p>
+    }
+    <button class="btn btn-primary " [disabled]="product.stock === 0" (click)="addToCart()">Add to Cart</button>
+
+  </div>
+</div>    

@@ -1,0 +1,30 @@
+/* Custom styles for the shopping cart */
+.container {
+    max-width: 1200px;
+  }
+  
+  .card {
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .btn-outline-secondary {
+    border-color: #ddd;
+  }
+  
+  .btn-outline-secondary:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .img-thumbnail {
+    border-radius: 8px;
+  }
+  
+  .card-footer {
+    border-top: 1px solid #eee;
+  }
